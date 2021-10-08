@@ -1,6 +1,6 @@
 import re
-import urllib
-import urlparse
+import urllib.request, urllib.parse, urllib.error
+import urllib.parse
 
 import logging
 
@@ -54,11 +54,11 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
 
             existing_keys = [entry.get('key') for entry in package_dict['extras']]
 
-            for key, value in default_extras.iteritems():
+            for key, value in default_extras.items():
                 # log.debug('Processing extra %s', key)
                 if not key in existing_keys or override_extras:
                     # Look for replacement strings
-                    if isinstance(value, basestring):
+                    if isinstance(value, str):
                         value = value.format(
                             harvest_source_id=str(harvest_object.job.source.id),
                             harvest_source_url=str(harvest_object.job.source.url).strip('/'),
@@ -71,7 +71,7 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
                     log.debug('Skipping existing extra %s', key)
 
         # parse and work with XML
-        inspire_xml = '<?xml version="1.0" encoding="UTF-8"?>' + harvest_object.content.encode('utf-8')
+        inspire_xml = ('<?xml version="1.0" encoding="UTF-8"?>' + harvest_object.content).encode('utf-8')
         inspire_dom = etree.fromstring(inspire_xml)
         inspire_template = etree.parse(xsl_temp)
         inspire_transform = etree.XSLT(inspire_template)
@@ -86,11 +86,11 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         inspire_string = inspire_string.rstrip()
 
         exec(inspire_string)
-
-        for key, value in rec.iteritems():
+        
+        for key, value in rec.items():
             value = value.lstrip()
             value = value.rstrip()
-            package_dict['extras'].append({'key': key, 'value': value.decode('utf-8')})
+            package_dict['extras'].append({'key': key, 'value': value})
 
         # Add harvester info
         package_dict['extras'].append({'key': 'inspire_harvester', 'value': 'true'})

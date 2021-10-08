@@ -50,7 +50,7 @@ def dict_produce(data):
     rec += extra.get('metadata-date', '').strip()
     rec += '''</dct:modified>
         <!-- Metadata point of contact -->'''
-    for key, party in extra.items():
+    for key, party in list(extra.items()):
         if "metadata-party" in key:
             party = party.strip()
             party = ' '.join(party.split())
@@ -211,7 +211,7 @@ def dict_produce(data):
 
     rec += '''<!--! contactPoint 1 -->
     '''
-    for key, party in extra.items():
+    for key, party in list(extra.items()):
         if "responsible-party1" in key:
             party = party.strip()
             party = ' '.join(party.split())
@@ -247,7 +247,7 @@ def dict_produce(data):
     rec += '''<!--! keywords  -->
         '''
         
-    for key, dkey in extra.items():
+    for key, dkey in list(extra.items()):
         if "descriptive-keywords" in key:
             dkey = dkey.strip()
             dkey = ' '.join(dkey.split())
@@ -285,7 +285,7 @@ def dict_produce(data):
       <dcat:Distribution>    
         <!--! Conditions for access and use -->
         '''
-    for key, accc in extra.items():
+    for key, accc in list(extra.items()):
         if "access_constraints" in key:
             accc = json.loads(accc)
             for acc in accc:
@@ -297,7 +297,7 @@ def dict_produce(data):
                 '''
     rec += '''<!--! Limitations on public access -->
     '''
-    for key, lice in extra.items():
+    for key, lice in list(extra.items()):
         if "licence" in key:
             lice = json.loads(lice)
             for lic in lice:

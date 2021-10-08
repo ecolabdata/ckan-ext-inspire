@@ -1,1 +1,1 @@
-from inspireh import InspireHarvester
+from .inspireh import InspireHarvester
