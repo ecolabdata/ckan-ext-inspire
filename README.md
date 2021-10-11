@@ -20,7 +20,13 @@ Depends on:
 
 
 ## Installation
-Copy plugins into ckan/src directory. In plugins folders run `python setup.py develop`.
+Clone repo into ckan/src directory. In each plugin folder run `python setup.py develop`. Create symlinks in the ckan/src folder for each plugin :
+
+```bash
+ln -s ckan-ext-inspire/ckanext-inspire_harvester ckanext-inspire_harvester
+ln -s ckan-ext-inspire/ckanext-inspire_theme ckanext-inspire_theme
+```
+
 In CKAN configuration file add plugins:
 - for inspire_harvester - `inspire_harvester`
 - for inspire_theme - `inspire_theme` - the endpoint is `rdfi` - to avoid conflicts with other extensions
