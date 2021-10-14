@@ -73,6 +73,7 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         # parse and work with XML
         inspire_xml = ('<?xml version="1.0" encoding="UTF-8"?>' + harvest_object.content).encode('utf-8')
         inspire_dom = etree.fromstring(inspire_xml)
+        # print(etree.tostring(inspire_dom, pretty_print=True, encoding="unicode"))
         inspire_template = etree.parse(xsl_temp)
         inspire_transform = etree.XSLT(inspire_template)
         inspire_ndom = inspire_transform(inspire_dom)
@@ -81,12 +82,14 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         inspire_string = str(inspire_ndom)
         inspire_string = inspire_string.replace("\t", "")
         inspire_string = inspire_string.replace("\r", "")
-        inspire_string = inspire_string.replace("\n", "")
+        #inspire_string = inspire_string.replace("\n", "")
         inspire_string = inspire_string.lstrip()
         inspire_string = inspire_string.rstrip()
-
+        print(inspire_string)
         exec(inspire_string)
         
+        package_dict['extras'][12]['key'] = "licence_old"
+
         for key, value in rec.items():
             value = value.lstrip()
             value = value.rstrip()
@@ -94,7 +97,7 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
 
         # Add harvester info
         package_dict['extras'].append({'key': 'inspire_harvester', 'value': 'true'})
-
+        print(package_dict['extras'])
         # End of processing, return the modified package
         return package_dict
 
