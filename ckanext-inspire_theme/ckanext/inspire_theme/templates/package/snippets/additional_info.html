@@ -122,12 +122,12 @@
         {% endif %}
 
         {# 6.2 spatial resolution #}
-        {% if ''.join(h.inspire_theme_toobj(ex.get('scales', ''))) %}
+        {% if h.inspire_theme_toobj(ex.get('scales', 0)) | sum %}
             <tr rel="dc:relation" resource="">
-                <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('spatial-resolution', '') }} </th>              
+                <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('spatial-resolution', '') }} </th>
                 <td class="dataset-details" property="rdf:value">
                     {% for row in h.inspire_theme_toobj( ex.get('scales', '')) %}
-                        1: {{ row }}{% if not(loop.last) %}, {% endif %}
+                        1:{{ row }}{% if not(loop.last) %}, {% endif %}
                     {% endfor %}
                 </td>
             </tr>

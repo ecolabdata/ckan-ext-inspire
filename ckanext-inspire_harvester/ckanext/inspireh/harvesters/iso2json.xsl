@@ -33,15 +33,9 @@
 
 rec["mdlang2"] = "<xsl:value-of select="$mdlang2"/>";
 
-rec["metadata-party"] = """[<xsl:for-each select="gmd:contact">
-<xsl:apply-templates select="*"/>
-      <xsl:if test="position() != last()">,</xsl:if>
-</xsl:for-each>]""";
+rec["metadata-party"] = """[<xsl:for-each select="gmd:contact"><xsl:apply-templates select="*"/><xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
-rec["responsible-party1"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:pointOfContact">
-<xsl:apply-templates select="*"/>
-    <xsl:if test="position() != last()">,</xsl:if>
-</xsl:for-each>]""";
+rec["responsible-party1"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:pointOfContact"><xsl:apply-templates select="*"/><xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
 rec["dataset-language"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:language">"<xsl:value-of select="normalize-space(*/@codeListValue)"/>"<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
@@ -49,10 +43,7 @@ rec["licence"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:resource
 
 rec["topic-category"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:topicCategory">"<xsl:value-of select="normalize-space(*)"/>"<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
-rec["resource-id"] = """[<xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:identifier">
-{"code":"<xsl:value-of select="normalize-space(*/gmd:code/*)"/>",
-"codeSpace":"<xsl:value-of select="normalize-space(*/gmd:codeSpace/*)"/>"}
-<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
+rec["resource-id"] = """[<xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:identifier">{"code":"<xsl:value-of select="normalize-space(*/gmd:code/*)"/>","codeSpace":"<xsl:value-of select="normalize-space(*/gmd:codeSpace/*)"/>"}<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
 rec["scales"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:spatialResolution/*/gmd:equivalentScale/*/gmd:denominator"><xsl:value-of select="normalize-space(*)"/><xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
@@ -84,12 +75,9 @@ rec["descriptive-keywords"] = """[<xsl:for-each select="gmd:identificationInfo/*
     }}<xsl:if test="position() != last()">,</xsl:if>
 </xsl:for-each>]""";
 
-<xsl:variable name="reclineage" select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString"/>
-<!--    rec['lineage'] = '<xsl:value-of select='replace($reclineage, "&apos;", "\&apos;")'/>';-->
 rec['lineage'] = """<xsl:value-of select='gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString'/>""";
 
-rec["specification"] = """[<xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result">{"title":"<xsl:value-of select="normalize-space(*/gmd:specification/*/gmd:title/gco:CharacterString)"/>",
-"date":"<xsl:value-of select="normalize-space(*/gmd:specification/*/gmd:date/*/gmd:date)"/>","pass":"<xsl:value-of select="normalize-space(*/gmd:pass)"/>"}<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
+rec["specification"] = """[<xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result">{"title":"<xsl:value-of select="normalize-space(*/gmd:specification/*/gmd:title/gco:CharacterString)"/>","date":"<xsl:value-of select="normalize-space(*/gmd:specification/*/gmd:date/*/gmd:date)"/>","pass":"<xsl:value-of select="normalize-space(*/gmd:pass)"/>"}<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 </xsl:template>
 
 <xsl:template match="gmd:CI_ResponsibleParty">
