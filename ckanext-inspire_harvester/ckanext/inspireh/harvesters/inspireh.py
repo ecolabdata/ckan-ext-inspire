@@ -97,18 +97,18 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
 
         # Add harvester info
         package_dict['extras'].append({'key': 'inspire_harvester', 'value': 'true'})
-        for key in package_dict:
-            obj = package_dict[key]
-            if isinstance(obj, str):
-                obj.replace("\n", "<br>")
-            else:
-                for item in obj:
-                    if all(x not in item.values() for x in ["descriptive-keywords", "metadata-party", "responsible-party1"]):
-                        #print(item.values())
-                        for key in item:
-                            data = item[key]
-                            if isinstance(data, str):
-                                item[key] = data.replace("\n", "<br>")
+        # for key in package_dict:
+        #     obj = package_dict[key]
+        #     if isinstance(obj, str):
+        #         obj.replace("\n", "<br/>")
+        #     else:
+        #         for item in obj:
+        #             if all(x not in item.values() for x in ["descriptive-keywords", "metadata-party", "responsible-party1"]):
+        #                 #print(item.values())
+        #                 for key in item:
+        #                     data = item[key]
+        #                     if isinstance(data, str):
+        #                         item[key] = data.replace("\n", "<br/>")
         print(package_dict)
         # End of processing, return the modified package
         return package_dict

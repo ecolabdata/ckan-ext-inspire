@@ -1,8 +1,8 @@
 {% ckan_extends %}
 	{% block extras scoped %}
 
-	{% set vyhybka = h.inspire_theme_list2dict(pkg_dict.extras) %}
-      {% if vyhybka.get('inspire_harvester') %}
+	{% set inspire_dict = h.inspire_theme_list2dict(pkg_dict.extras) %}
+      {% if inspire_dict.get('inspire_harvester') %}
         <style>
             .rlabel {width:80px; display: inline-block;}
         </style>
@@ -115,9 +115,7 @@
         {% if ex.get('lineage', None) %}
             <tr rel="dc:relation" resource="">
                 <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('lineage', '') }} </th>              
-                <td class="dataset-details" property="rdf:value">
-                    {{ ex.get('lineage') }}
-                </td>
+                <td class="dataset-details" property="rdf:value" style="white-space: pre-line;">{{ ex.get('lineage') }}</td>
             </tr>
         {% endif %}
 
