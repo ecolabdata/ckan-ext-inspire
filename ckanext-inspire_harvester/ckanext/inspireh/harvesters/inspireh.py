@@ -109,7 +109,7 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         #                     data = item[key]
         #                     if isinstance(data, str):
         #                         item[key] = data.replace("\n", "<br/>")
-        print(package_dict)
+        print(package_dict['extras'])
         # End of processing, return the modified package
         return package_dict
 

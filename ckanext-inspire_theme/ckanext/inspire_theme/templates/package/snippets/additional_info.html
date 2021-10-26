@@ -50,8 +50,21 @@
                 </td>
             </tr>
         {% endif %}
+
+        {# 8.1 Aggregate #}
+        {% if ''.join(h.inspire_theme_toobj(ex.get('aggregate', ''))) %}
+            <tr rel="dc:relation" resource="">
+                <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('aggregate', '') }} </th>              
+                <td class="dataset-details" property="rdf:value">
+                    {% for row in h.inspire_theme_toobj( ex.get('aggregate', '')) %}
+                        {{ row }}
+                        {% if not(loop.last) %} <br/> {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endif %}
         
-        {# 3 keywords #}
+<!--         {# 3 keywords #}
         {% if ex.get('descriptive-keywords', None) %}
             <tr rel="dc:relation" resource="">
                 <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('descriptive-keywords', '') }} </th>              
@@ -74,7 +87,7 @@
                   {% endfor %}
               </td>
             </tr>
-        {% endif %}
+        {% endif %} -->
 
         {# 4.1 Geographic bounding box #}
         {% if ''.join([ex.get('bbox-west-long'), ex.get('bbox-south-lat'), ex.get('bbox-east-long'), ex.get('bbox-north-lat')]) %}
