@@ -39,7 +39,7 @@ rec["responsible-party1"] = """[<xsl:for-each select="gmd:identificationInfo/*/g
 
 rec["dataset-language"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:language">"<xsl:value-of select="normalize-space(*/@codeListValue)"/>"<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
-rec["licence"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:useLimitation">"<xsl:value-of select="normalize-space(*)"/>"<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
+rec["licence"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:useLimitation/*">"<xsl:value-of select="translate(., '\&quot;', '')"/>"<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 
 rec["aggregate"] = """[<xsl:for-each select="gmd:identificationInfo/*/gmd:aggregationInfo">"<xsl:value-of select="normalize-space(gmd:MD_AggregateInformation/gmd:aggregateDataSetIdentifier/*/gmd:code/*)"/>"<xsl:if test="position() != last()">,</xsl:if></xsl:for-each>]""";
 

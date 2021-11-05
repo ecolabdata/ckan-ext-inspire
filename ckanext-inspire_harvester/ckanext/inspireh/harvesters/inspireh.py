@@ -97,6 +97,11 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
 
         # Add harvester info
         package_dict['extras'].append({'key': 'inspire_harvester', 'value': 'true'})
+
+        # change url to guid
+        if package_dict['extras'][0]['key'] == 'guid':
+            package_dict['name'] = package_dict['extras'][0]['value']
+
         # for key in package_dict:
         #     obj = package_dict[key]
         #     if isinstance(obj, str):
@@ -109,7 +114,7 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         #                     data = item[key]
         #                     if isinstance(data, str):
         #                         item[key] = data.replace("\n", "<br/>")
-        print(package_dict['extras'])
+        print(package_dict)
         # End of processing, return the modified package
         return package_dict
 

@@ -13,7 +13,7 @@
         <tr rel="dc:relation" resource="">
           <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('resource-type', '') }} </th>              
           <td class="dataset-details" property="rdf:value">
-                {{ lookup.codes.get('resource-type').get(ex.get('resource-type',''), '') }}
+              {{ lookup.codes.get('resource-type').get(ex.get('resource-type',''), '') }}
           </td>
         </tr>
 
@@ -39,6 +39,16 @@
         </tr>
         {% endif %}
 
+        {# CZ1 metadata identifier #}
+        {% if ex.get('GUID', None) %}
+        <tr rel="dc:relation" resource="">
+            <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('guid', '') }} </th>              
+            <td class="dataset-details" property="rdf:value">
+                {{ ex.get('GUID') }}
+            </td>
+        </tr>
+        {% endif %}
+
         {# 2.1 Topic category #}
         {% if ex.get('topic-category') %}
             <tr rel="dc:relation" resource="">
@@ -57,7 +67,9 @@
                 <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('aggregate', '') }} </th>              
                 <td class="dataset-details" property="rdf:value">
                     {% for row in h.inspire_theme_toobj( ex.get('aggregate', '')) %}
+                        <a href="{{ h.url_for('dataset.read', id=row) }}">
                         {{ row }}
+                        </a>
                         {% if not(loop.last) %} <br/> {% endif %}
                     {% endfor %}
                 </td>
@@ -252,16 +264,6 @@
                 <td class="dataset-details" property="rdf:value">
                     {{ ex.get('spatial-reference-system') }}
             </tr>
-        {% endif %}
-
-        {# CZ1 metadata identifier #}
-        {% if ex.get('guid', None) %}
-        <tr rel="dc:relation" resource="">
-            <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('guid', '') }} </th>              
-            <td class="dataset-details" property="rdf:value">
-                {{ ex.get('guid') }}
-            </td>
-        </tr>
         {% endif %}
         
         {#% for extra in pkg_dict.extras %}
