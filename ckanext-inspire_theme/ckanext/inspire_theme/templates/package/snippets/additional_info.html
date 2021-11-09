@@ -67,10 +67,12 @@
                 <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('aggregate', '') }} </th>              
                 <td class="dataset-details" property="rdf:value">
                     {% for row in h.inspire_theme_toobj( ex.get('aggregate', '')) %}
-                        <a href="{{ h.url_for('dataset.read', id=row) }}">
-                        {{ row }}
-                        </a>
-                        {% if not(loop.last) %} <br/> {% endif %}
+                        {% if h.inspire_theme_package_name_to_title(row) %}
+                            <a href="{{ h.url_for('dataset.read', id=row) }}">
+                            {{ h.inspire_theme_package_name_to_title(row) }}
+                            </a>
+                            {% if not(loop.last) %} <br/> {% endif %}
+                        {% endif %}
                     {% endfor %}
                 </td>
             </tr>

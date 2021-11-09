@@ -10,7 +10,7 @@
         "frequency-of-update": "Update frequency",
         "graphic-preview-file": "Graphic preview",
         "licence": "Licence",
-        "aggregate": "Aggregate",
+        "aggregate": "Related datasets",
         "lineage": "Lineage",
         "metadata-date": "Metadata date",
         "metadata-party": "Metadata contact",
@@ -25,7 +25,6 @@
         "specification": "Specification",
         "temporal-extent": "Temporal extent",
         "topic-category": "Topic category",
-
         "pass": "Pass",
         "free-keywords": "Free"
     },

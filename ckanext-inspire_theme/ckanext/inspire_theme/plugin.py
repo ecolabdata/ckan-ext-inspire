@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckan.model as model
 import ckan.lib
 import re
 import logging
@@ -27,6 +28,15 @@ def toobj(term):
     except:
         log.debug('Unrecognized JSON %s', term)
     return termj
+
+
+def package_name_to_title(name):
+    package = model.Package.by_name(name)
+    if package is not None:
+        if package.title is not None:
+            return package.title
+        return name
+    return None
 
 
 def list2dict(l):
@@ -183,7 +193,7 @@ class InspireThemePlugin(plugins.SingletonPlugin):
         # Template helper function names should begin with the name of the
         # extension they belong to, to avoid clashing with functions from
         # other extensions.
-        return {'inspire_theme_humanreadable': humanreadable, 'inspire_theme_bettercategories': bettercategories, 'inspire_theme_list2dict': list2dict, 'inspire_theme_getdict': dict, 'inspire_theme_toobj': toobj}
+        return {'inspire_theme_package_name_to_title': package_name_to_title, 'inspire_theme_humanreadable': humanreadable, 'inspire_theme_bettercategories': bettercategories, 'inspire_theme_list2dict': list2dict, 'inspire_theme_getdict': dict, 'inspire_theme_toobj': toobj}
 
     def before_map(self, route_map):
         controller = "ckanext.inspire_theme.controller:InspireThemeController"
