@@ -31,6 +31,7 @@ def toobj(term):
 
 
 def package_name_to_title(name):
+# converts package's name (aka unique URL identifier) to its title. Returns None if package doesn't exist.
     package = model.Package.by_name(name)
     if package is not None:
         if package.title is not None:

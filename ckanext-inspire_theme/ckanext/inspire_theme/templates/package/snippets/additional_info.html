@@ -61,12 +61,13 @@
             </tr>
         {% endif %}
 
-        {# 8.1 Aggregate #}
+        {# 8.1 Aggregate fields, aka related datasets #}
         {% if ''.join(h.inspire_theme_toobj(ex.get('aggregate', ''))) %}
             <tr rel="dc:relation" resource="">
                 <th scope="row" class="dataset-label" property="rdfs:label">{{ lookup.labels.get('aggregate', '') }} </th>              
                 <td class="dataset-details" property="rdf:value">
                     {% for row in h.inspire_theme_toobj( ex.get('aggregate', '')) %}
+                        {# check if dataset exists using function in plugin.py, if yes, generate url to create link with title as text #}
                         {% if h.inspire_theme_package_name_to_title(row) %}
                             <a href="{{ h.url_for('dataset.read', id=row) }}">
                             {{ h.inspire_theme_package_name_to_title(row) }}

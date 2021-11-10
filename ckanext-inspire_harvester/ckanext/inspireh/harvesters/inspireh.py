@@ -88,6 +88,7 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         #print(inspire_string)
         exec(inspire_string)
         
+        # default "licence" field not parsed correctly, old parsing renamed as "licence_old" here and better parsing for inspire datasets done in iso2json.xsl
         package_dict['extras'][12]['key'] = "licence_old"
 
         for key, value in rec.items():
@@ -98,7 +99,7 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         # Add harvester info
         package_dict['extras'].append({'key': 'inspire_harvester', 'value': 'true'})
 
-        # change url to guid
+        # change url to guid /!\ needs each guid to be unique or will return validation error on fetch stage
         if package_dict['extras'][0]['key'] == 'guid':
             package_dict['name'] = package_dict['extras'][0]['value']
 
@@ -114,7 +115,8 @@ class InspireHarvester(CSWHarvester, SingletonPlugin):
         #                     data = item[key]
         #                     if isinstance(data, str):
         #                         item[key] = data.replace("\n", "<br/>")
-        print(package_dict)
+        # print(package_dict)
+        
         # End of processing, return the modified package
         return package_dict
 
